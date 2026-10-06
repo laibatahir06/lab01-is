@@ -1,0 +1,47 @@
+# Function to encrypt the message
+def encrypt_message(message, key):
+    encrypted = ""
+
+    key = key % 26
+
+    for char in message:
+        if 'A' <= char <= 'Z':
+            encrypted += chr((ord(char) - ord('A') + key) % 26 + ord('A'))
+        elif 'a' <= char <= 'z':
+            encrypted += chr((ord(char) - ord('a') + key) % 26 + ord('a'))
+        else:
+            encrypted += char
+
+    return encrypted
+
+
+# Function to decrypt the message
+def decrypt_message(message, key):
+    decrypted = ""
+
+    key = key % 26
+
+    for char in message:
+        if 'A' <= char <= 'Z':
+            decrypted += chr((ord(char) - ord('A') - key) % 26 + ord('A'))
+        elif 'a' <= char <= 'z':
+            decrypted += chr((ord(char) - ord('a') - key) % 26 + ord('a'))
+        else:
+            decrypted += char
+
+    return decrypted
+
+
+# Take input from the user
+plaintext = input("Enter the message: ")
+key = int(input("Enter the Caesar shift/key: "))
+
+# Encrypt the message
+ciphertext = encrypt_message(plaintext, key)
+
+# Decrypt the encrypted message
+decrypted_text = decrypt_message(ciphertext, key)
+
+# Display results
+print("\nEncrypted message:", ciphertext)
+print("Decrypted message:", decrypted_text)
